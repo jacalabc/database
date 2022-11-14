@@ -13,13 +13,32 @@
     $dsn="mysql:host=localhost;charset=utf8;dbname=school";
     $pdo=new PDO($dsn,'root','');
 
-    $sql="SELECT * FROM `students` limit 5";
+    $sql="SELECT * FROM `students` limit 10";
 
     $rows=$pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
-    echo "<pre>";
-    print_r($rows);
-    echo "</pre>";
     ?>
+
+    <table class="students-list">
+        <tr>
+            <td>學號</td>
+            <td>姓名</td>
+            <td>生日</td>
+            <td>畢業國中</td>
+            <td>年齡</td>
+        </tr>
+    <?php
+    foreach($rows as $row){
+        $age=round((strtotime('now')-strtotime($row['birthday']))/(60*60*24*365),1);
+
+        echo "<tr>";
+        echo "<td>{$row['school_num']}</td>";
+        echo "<td>{$row['name']}</td>";
+        echo "<td>{$row['birthday']}</td>";
+        echo "<td>{$row['graduate_at']}</td>";
+        echo "<td>{$age}</td>";
+        echo "</tr>";
+    }    
+    ?>
+    </table>
 </body>
 </html>
