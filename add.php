@@ -58,19 +58,39 @@ $pdo=new PDO($dsn,'root','');
         </tr>
         <tr>
             <td>graduate_at</td>
-            <td></td>
+            <td>
+                <select name="graduate_at">
+                    <?php
+                    $sql="SELECT * FROM `graduate_school`";
+                    $grads=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($grads as $grad){
+                        echo "<option value='{$grad['id']}'>{$grad['county']}{$grad['name']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>status_code</td>
-            <td></td>
+            <td>
+                <select name="status_code">
+                    <?php
+                    $sql="SELECT * FROM `status`";
+                    $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($rows as $row){
+                        echo "<option value='{$row['id']}'>{$row['status']}</option>";
+                    }
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>班級</td>
-            <td></td>
+            <td><input type="text" name="classes"></td>
         </tr>
         <tr>
             <td>座號</td>
-            <td></td>
+            <td><input type="number" name="seat_num"></td>
         </tr>
     </table>
     <input type="submit" value="確認新增">
