@@ -1,9 +1,12 @@
 <?php
+//使用PDO方式建立資料庫連線物件
 $dsn = "mysql:host=localhost;charset=utf8;dbname=school";
 $pdo = new PDO($dsn, 'root', '');
 
-$sql = "SELECT * FROM `students` limit 10";
+//建立撈取學生資料的語法，限制只撈取前20筆
+$sql = "SELECT * FROM `students` limit 20";
 
+//執行SQL語法，並從資料庫取回全部符合的資料，加上PDO::FETCH_ASSOC表示只需回傳帶有欄位名的資料
 $rows = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -25,6 +28,26 @@ $rows = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
         <a href="login.php">教師登入</a>
     </nav>
 
+    <nav>
+        <!--根據status來顯示回應-->
+        <?php
+        if(isset($_GET['status'])){
+            switch($_GET['status']){
+                case 'add_success':
+                    echo "<span style='color:green'>新增學生成功</span>";
+                break;
+                case 'add_fail';
+                    echo "<span style='color:red'>新增學生有誤</span>";
+                break;
+                case 'edit_error':
+                    echo "<span style='color:red'>無法編輯，請洽管理員，或正確操作</span>";
+                break;
+            }
+        }
+        ?>
+    </nav>
+
+    <!--建立顯示學生列表的表格html語法-->
     <table class="students-list">
         <tr>
             <td>學號</td>
@@ -35,6 +58,7 @@ $rows = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             <td>操作</td>
         </tr>
         <?php
+        //使用迴圈來顯示每一位學生的資料
         foreach ($rows as $row) {
             $age = round((strtotime('now') - strtotime($row['birthday'])) / (60 * 60 * 24 * 365), 1);
 
@@ -45,7 +69,9 @@ $rows = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             echo "<td>{$row['graduate_at']}</td>";
             echo "<td>{$age}</td>";
             echo "<td>";
+            //加上連結將頁面導向edit.php，同時以GET方式將學生資料的id傳遞到edit.php
             echo "<a href='edit.php?id={$row['id']}'>編輯</a>";
+            //加上連結將頁面導向del.php，同時以GET方式將學生資料的id傳遞到del.php
             echo "<a href='del.php?id={$row['id']}'>刪除</a>";
             echo "</td>";
             echo "</tr>";
