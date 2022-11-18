@@ -45,7 +45,7 @@ echo $sql_class;
 $res1=$pdo->exec($sql);
 $res2=$pdo->exec($sql_class);
 // echo "新增成功".$res1;
-if($res1 == $res2){
+if($res1 && $res2){
         $status='add_success';
 }else{
         $status='add_fail';

@@ -97,7 +97,7 @@ $pdo=new PDO($dsn,'root','');
         <tr>
             <td>班級</td>
             <td>
-                <select name="class">
+                <select name="class_code" onchange="upadte.php">
                     <?php
                     //從`classes`資料表中撈出所有的班級資料並在網頁上製作成下拉選單的項目
                     $sql="SELECT `id`,`name` FROM `classes`";

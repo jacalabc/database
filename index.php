@@ -72,6 +72,7 @@ $rows = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             //加上連結將頁面導向edit.php，同時以GET方式將學生資料的id傳遞到edit.php
             echo "<a href='edit.php?id={$row['id']}'>編輯</a>";
             //加上連結將頁面導向del.php，同時以GET方式將學生資料的id傳遞到del.php
+            // echo "<a href='del.php?id={$row['id']}'>刪除</a>";
             echo "<a href='del.php?id={$row['id']}'>刪除</a>";
             echo "</td>";
             echo "</tr>";
