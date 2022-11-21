@@ -6,6 +6,8 @@
 
 .students-list{
     border-collapse: collapse;
+    width: 800px;
+    margin: auto;
 }
 .students-list td{
     border: 1px solid #aaa;
@@ -15,6 +17,29 @@
 /* .students-list td:nth-last-child(1){ */
     /* text-align: right; */
 /* } */
+nav,.pages{
+    text-align: center;
+}
+.pages{
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+}
+.pages a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 5px #ccc;  
+    text-align: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;  
+}
 
 nav a{
     display: inline-block;
@@ -30,6 +55,8 @@ nav a:hover{
 .class-list{
     display: flex;
     list-style-type: none;
+    justify-content: center;
+    align-items: center;
     margin: 5px 0;
 }
 nav ul.class-list li a{
@@ -45,4 +72,12 @@ nav ul.class-list li a{
     color: white;
     font-weight: bold;
     text-decoration: underline;
+}
+.now{
+    background-color: green;
+    color: white;
+}
+.pages a.noshow{
+    border: 0px solid #eee;
+    box-shadow: initial;  
 }

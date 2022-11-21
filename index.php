@@ -111,22 +111,78 @@ if(isset($_GET['status'])){
             echo "&lt";
             echo " </a>";
         }
+    }else{
+        echo "<a class='noshow'>&nbsp</a>";
     }
     ?>    
+    <div>
+    <?php
+    //顯示第一頁
+        if($now>=4){
+            if(isset($_GET['code'])){
+                echo "<a href='?page=1&code={$_GET['code']}'> ";
+                echo "1 ";
+                echo " </a>";                
+            }else{               
+                echo "<a href='?page=1'> ";
+                echo "1 ";
+                echo " </a>...";
+            }
+        }
+    ?>
     <?php
     //頁碼區
-    for($i=1;$i<=$pages;$i++){
-        if(isset($_GET['code'])){
-            echo "<a href='?page=$i&code={$_GET['code']}'> ";
-            echo $i;
-            echo " </a>";           
-        }else{            
-            echo "<a href='?page=$i'> ";
-            echo $i;
-            echo " </a>";
-        }
+    // 只顯示前後四個頁碼
+
+    if($now>=3 && $now<=($pages-2)){  //判斷頁碼在>=3 及小於最後兩頁的狀況
+        $startpage=$now-2;
+    }else if($now-2<3){  //判斷頁碼在1，2頁的狀況
+        $startpage=1;
+    }else{  //判斷頁碼在最後兩頁的狀況
+        $startpage=$pages-4;
     }
+
+        for($i=$startpage;$i<=($startpage+4);$i++){
+            $nowpage=($i==$now)?'now':'';
+            if(isset($_GET['code'])){
+                echo "<a href='?page=$i&code={$_GET['code']}' class='$nowpage'> ";
+                echo $i;
+                echo " </a>";           
+            }else{            
+                echo "<a href='?page=$i' class='$nowpage'> ";
+                echo $i;
+                echo " </a>";
+            }
+        }
+    // 全部頁碼顯示
+    // for($i=1;$i<=$pages;$i++){
+        // $nowpage=($i==$now)?'now':'';
+        // if(isset($_GET['code'])){
+            // echo "<a href='?page=$i&code={$_GET['code']}' class='$nowpage'> ";
+            // echo $i;
+            // echo " </a>";           
+        // }else{            
+            // echo "<a href='?page=$i' class='$nowpage'> ";
+            // echo $i;
+            // echo " </a>";
+        // }
+    // }
     ?>
+    <?php
+    //顯示最後一頁
+        if($now<=($pages-3)){
+            if(isset($_GET['code'])){
+                echo "...<a href='?page=$pages&code={$_GET['code']}'> ";
+                echo "$pages";
+                echo " </a>";                
+            }else{               
+                echo "...<a href='?page=$pages'> ";
+                echo "$pages";
+                echo " </a>";
+            }
+        }
+    ?>
+    </div>
     <?php
     // 下一頁
     // 當前頁碼+1，可是不能超過總頁數，最大是總頁數，如果超過總頁數，不顯示
@@ -141,6 +197,8 @@ if(isset($_GET['status'])){
             echo "&gt";
             echo " </a>";
         }
+    }else{
+        echo "<a class='noshow'>&nbsp</a>";
     }
     ?>
 </div>
@@ -176,12 +234,5 @@ foreach($rows as $row){
 }
 ?>
 </table>
-<div>
-    <a href=""> < </a>
-    <a href=""> 1 </a>
-    <a href=""> 2 </a>
-    <a href=""> 3 </a>
-    <a href=""> > </a>
-</div>
 </body>
 </html>
