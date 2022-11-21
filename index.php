@@ -55,10 +55,17 @@ $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 </head>
 <body>
+<?php
+    if(isset($_GET['del'])){
+       echo "<div class='del-msg'>";
+       echo $_GET['del'];
+       echo "</div>";
+    }
+?>
 <!-- <pre>
    <?php //print_r($rows);?> ;
 </pre> -->
-<h1>學生管理系統</h1>
+<h1 style="text-align:center">學生管理系統</h1>
 <nav>
     <a href="add.php">新增學生</a>
     <a href="reg.php">教師註冊</a>
@@ -227,7 +234,8 @@ foreach($rows as $row){
  //加上連結將頁面導向edit.php，同時以GET方式將學生資料的id傳遞到edit.php
  echo "<a href='edit.php?id={$row['id']}'>編輯</a>";
  //加上連結將頁面導向del.php，同時以GET方式將學生資料的id傳遞到del.php
- echo "<a href='./api/del_student.php?id={$row['id']}'>刪除</a>";
+//  echo "<a href='./api/del_student.php?id={$row['id']}'>刪除</a>";
+ echo "<a href='./api/confirm_del.php?id={$row['id']}'>刪除</a>";
  //echo "<a href='del.php?id={$row['id']}'>刪除</a>";
  echo "</td>";
  echo "</tr>";
