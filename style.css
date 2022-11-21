@@ -81,3 +81,40 @@ nav ul.class-list li a{
     border: 0px solid #eee;
     box-shadow: initial;  
 }
+.del-msg{
+    width: 80%;
+    text-align: center;
+    font-size: 2rem;
+    background-color: pink;
+    margin: 1rem auto;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    animation-name:del-fade;
+    animation-duration:5S;
+    opacity: 0;
+    display: none;
+    height: 0;
+}
+@keyframes fade{
+    0%{
+       height: 0rem;
+    }
+    10%{
+        height: 3.5rem;
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    70%{
+        height: 3.5rem;
+        opacity: 1;
+    }
+    80%{
+        height: 3.5rem;
+        opacity: 0;
+    }
+    100%{
+        height: 0;
+    }
+}
