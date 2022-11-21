@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+    header("location:index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,9 +76,7 @@ $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <h1 style="text-align:center">學生管理系統</h1>
 <nav>
     <a href="add.php">新增學生</a>
-    <a href="reg.php">教師註冊</a>
-    <a href="login.php">教師登入</a>
-
+    <a href="logout.php">教師登出</a>
 </nav>
 <nav>
 <ul class="class-list">
