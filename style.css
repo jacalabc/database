@@ -89,7 +89,7 @@ nav ul.class-list li a{
     margin: 1rem auto;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    animation-name:del-fade;
+    animation-name:fade;
     animation-duration:5S;
     opacity: 0;
     display: none;
