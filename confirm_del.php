@@ -1,6 +1,5 @@
 <?php
-$dsn = "mysql:host=localhost;charset=utf8;dbname=school";
-$pdo = new PDO($dsn, 'root', '');
+include "./database/base.php";
 
 $student = $pdo->query("SELECT * FROM `students` WHERE `id`='{$_GET['id']}'")
     ->fetch(PDO::FETCH_ASSOC);

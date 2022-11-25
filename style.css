@@ -16,13 +16,13 @@ header .nav {
     background-color: lightskyblue;
 }
 
-.students-list {
+.list-students{
     border-collapse: collapse;
     width: 800px;
     margin: auto;
 }
 
-.students-list td {
+.list-students td {
     border: 1px solid #aaa;
     padding: 5px 10px;
     text-align: center;
