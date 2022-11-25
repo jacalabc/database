@@ -34,19 +34,12 @@ include "./database/base.php";
     include "./layouts/class_nav.php"
     ?>
     <?php
-    $do = $_GET['do'] ?? 'main';
-    switch ($do) {
-        case 'add':
-            include "./back/add.php";
-            break;
-        case 'edit':
-            include "./back/edit.php";
-            break;
-        case 'del':
-            include "./back/confirm_del.php";
-            break;
-        default:
-            include "./back/main.php";
+    $do=$_GET['do']??'main';
+    $file = "./back".$do.".php";
+    if(file_exists($file)){
+        include $file;
+    }else{
+        include "./back/main.php";
     }
     ?>
 
