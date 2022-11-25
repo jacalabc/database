@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     header("location:index.php");
     exit();
 }
@@ -9,6 +9,7 @@ include "./database/base.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,23 +18,38 @@ include "./database/base.php";
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-<?php
+    <?php
     include "./layouts/header.php";
-?>
+    ?>
 
-<h1 style='text-align:center'>學生管理系統</h1>
-<nav>
-    <a href="add.php">新增學生</a>
-    <a href="logout.php">教師登出</a>
-</nav>
+    <h1 style='text-align:center'>學生管理系統</h1>
+    <nav>
+        <a href="add.php">新增學生</a>
+        <a href="logout.php">教師登出</a>
+    </nav>
 
-<?php
-   include "./layouts/class_nav.php"
-?>  
-<?php
-    include "./back/main.php";
-?>
-    
+    <?php
+    include "./layouts/class_nav.php"
+    ?>
+    <?php
+    $do = $_GET['do'] ?? 'main';
+    switch ($do) {
+        case 'add':
+            include "./back/add.php";
+            break;
+        case 'edit':
+            include "./back/edit.php";
+            break;
+        case 'del':
+            include "./back/confirm_del.php";
+            break;
+        default:
+            include "./back/main.php";
+    }
+    ?>
+
 </body>
+
 </html>
