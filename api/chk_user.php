@@ -1,5 +1,5 @@
 <?php
-include "../database/base.php";
+include "../db/base.php";
 
 session_start();
 
