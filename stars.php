@@ -4,7 +4,7 @@
 stars( 5);
 stars('菱形');
 stars(12);
-stars(9);
+stars('直角三角形');
 
 function stars($shape = '正三角形', $size = 7)
 {
