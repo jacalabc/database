@@ -1,13 +1,18 @@
 <h2>使用函式來印出星星</h2>
 <pre>
 <?php
-stars('正三角形', 5);
-stars('菱形', 11);
-stars('矩形', 12);
-stars('直角三角形', 9);
+stars( 5);
+stars('菱形');
+stars(12);
+stars(9);
 
-function stars($shape, $size)
+function stars($shape = '正三角形', $size = 7)
 {
+    $array=['正三角形','菱形','矩形','直角三角形'];
+    if(!in_array($shape,$array)){
+        echo "請填入正確的形狀('正三角形','菱形','矩形','直角三角形')";
+        return;
+    }
     switch ($shape) {
         case "正三角形":
             for ($i = 1; $i <= $size; $i++) {
