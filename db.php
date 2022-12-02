@@ -3,8 +3,14 @@
 <?php
 include_once "./db/base.php";
 
-$rows=all('students',['dept'=>1,'graduate_at'=>1]," ORDER BY `id` desc");
+// $rows=all('students',['dept'=>6,'graduate_at'=>8]," ORDER BY `id` desc");
+// dd($rows);
+
+$rows = find('students', 200);
 dd($rows);
+$rows = find('students',['name'=>'白金圓']);
+dd($rows);
+
 
 function dd($array)
 {
@@ -24,27 +30,49 @@ function all($table, ...$args)
     $sql = "SELECT * FROM $table ";
 
     if (isset($args[0])) {
-        if(is_array($args[0])){
+        if (is_array($args[0])) {
             // 是陣列 ['acc' => 'qwer1', 'pw' => 'qwer1'];
             // 是陣列 ['product' => 'pc', 'price' => '10000'];
-            
-            foreach($args[0] as $key => $value){
-                $tmp[]="`$key`='$value'";
+
+            foreach ($args[0] as $key => $value) {
+                $tmp[] = "`$key`='$value'";
             }
-            
-            $sql=$sql . " WHERE " . join(" && ",$tmp);
-        }else{
+
+            $sql = $sql . " WHERE " . join(" && ", $tmp);
+        } else {
             // 是字串
             $sql = $sql . $args[0];
         }
     }
-    
-    if(isset($args[1])){
-        $sql=$sql . $args[1];
+
+    if (isset($args[1])) {
+        $sql = $sql . $args[1];
     }
 
     echo $sql;
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// 傳回指定id的資料
+
+
+function find($table, $id)
+{
+    global $pdo;
+    $sql = "SELECT * FROM `$table` ";
+
+    if (is_array($id)) {
+        foreach($id as $key => $value){
+            $tmp[] = "`$key`='$value'";
+        }
+
+        $sql = $sql . " WHERE " . join(" && ", $tmp);
+
+    } else {
+        $sql = $sql . "WHERE `id`='$id'";
+    }
+
+    return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
