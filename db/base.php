@@ -110,7 +110,7 @@ function update($table, $col, ...$args)
     }
 
     // echo $sql;
-    // return $pdo->exec($sql);
+    return $pdo->exec($sql);
 }
 
 //insert()-給定資料內容後，會去新增資料到資料表
@@ -156,7 +156,7 @@ function del($table, $id)
     }
 
     // echo $sql;
-    // return $pdo->exec($sql);
+    return $pdo->exec($sql);
 }
 
 // q()-萬用自訂查詢函式
