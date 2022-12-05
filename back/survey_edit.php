@@ -8,7 +8,10 @@ if(isset($_GET['id'])){
     header("location:admin_center.php?do=survey&error=沒有指定編輯的調查id");
 }
 ?>
-<h3 class="text-center">編輯調查</h3>
+<h3 class="text-center">
+    編輯調查
+    <button onclick='addOption()' class="btn btn-success btn-sm py-0" style="font-size:1.5rem">+</button>
+</h3>
 
 <form action="./api/survey_edit.php" class="col-10 mx-auto d-flex flex-wrap justify-content-end" method="post">
     <div class="form-group row col-12">
@@ -22,8 +25,9 @@ if(isset($_GET['id'])){
         ?>
             <div class="form-group row col-11">
                 <label class="col-2 text-right">項目<?=$idx+1;?></label>
-                <input type="text" name="opt[]" value="<?=$option['opt'];?>" class="form-control col-10">
+                <input type="text" name="opt[]" value="<?=$option['opt'];?>" class="form-control col-9">
                 <input type="hidden" name="opt_id[]" value="<?=$option['id'];?>">
+                <a href="./api/survey_option_del.php?id=<?=$option['id'];?>" class="btn btn-danger btn-sm py-0">-</a>
             </div>    
         <?php
         }
@@ -34,3 +38,30 @@ if(isset($_GET['id'])){
         <input class="btn btn-warning mx-1" type="reset" value="重置">
     </div>
 </form>
+<script>
+    function addOption() {
+        let options = document.getElementById('options');
+        let num = document.getElementsByClassName('option').length + 1;
+        // let opt = `<div class="option form-group row col-12">
+        // <label class="col-2 text-right">項目${num}</label>
+        // <input type="text" name="opt[]" class="form-control col-10">
+        //    </div>`
+        let opt = document.createElement("div");
+        let label = document.createElement("label");
+        let input = document.createElement("input");
+        let numNode = document.createTextNode("項目"+num);
+
+        opt.setAttribute("class", "option form-group row col-12");
+        label.setAttribute("class", "col-2 text-right");
+        input.setAttribute("class", "form-control col-10");
+        input.setAttribute("name", "opt[]");
+        input.setAttribute("type", "text");
+        
+        label.appendChild(numNode);
+        opt.appendChild(label);
+        opt.appendChild(input);
+
+        options.appendChild(opt);
+        // console.log(options.innerHTML + opt);
+    }
+</script>
