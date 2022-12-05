@@ -131,7 +131,7 @@ function insert($table, $cols)
     $sql = "INSERT INTO $table (`" . join("`,`", $keys) . "`) values('" . join("','", $cols) . "')";
 
     // echo $sql;
-    // return $pdo->exec($sql);
+    return $pdo->exec($sql);
 }
 
 
