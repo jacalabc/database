@@ -1,3 +1,13 @@
+<?php
+if(isset($_GET['id'])){
+    $subject=find('survey_subject',$_GET['id']);
+    dd($subject);
+    $options=all('survey_options',['subject_id'=>$_GET['id']]);
+    dd($options);
+}else{
+    header("location:admin_center.php?do=survey&error=沒有指定編輯的調查id");
+}
+?>
 <h3 class="text-center">編輯調查</h3>
 
 <form action="./api/survey_edit.php" class="col-10 mx-auto d-flex flex-wrap justify-content-end" method="post">
